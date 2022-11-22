@@ -8,14 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var tabSelected = 1
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        TabView(selection: $tabSelected) {
+            
+            MapView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "star.circle.fill")
+                        Text("Milestones")
+                    }
+                }
+                .tag(1)
+            
+            AddEntryView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "plus.circle")
+                        Text("Add")
+                    }
+                }
+                .tag(2)
+            
+            MapView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "target")
+                        Text("Targets")
+                    }
+                }
+                .tag(3)
         }
-        .padding()
+        .accentColor(.black.opacity(0.8))
     }
 }
 
