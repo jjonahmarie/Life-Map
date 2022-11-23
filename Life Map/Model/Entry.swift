@@ -9,18 +9,26 @@ import Foundation
 
 struct Entry {
     
-    var id: UUID
-    var year: Int
-    var month: Int
-    var day: Int?
-    var type: EntryType
-    var description: String
+    var id: UUID = UUID()
+    var year: Int = 2008
+    var month: Month = Entry.Month.April
+    var day: Int? = 28
+    var isAchieved: Bool = false
+    var description: String = "Anniversary"
     
-    var categoryName: String?
-    var categoryIcon: String?
-    
-    enum EntryType {
-        case milestone
-        case target
+    enum Month {
+        case January,
+             February,
+             March,
+             April,
+             May,
+             June,
+             July,
+             August,
+             September,
+             October,
+             November,
+             December
     }
+
 }
