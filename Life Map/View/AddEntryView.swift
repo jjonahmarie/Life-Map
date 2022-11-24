@@ -15,41 +15,73 @@ struct AddEntryView: View {
     var month = ["January", "February", "March", "April", "May"]
     @State private var selectedMonth = "April"
     
+    var day: [Int] = [25, 26, 27, 28, 29, 30]
+    @State private var selectedDay = 28
 
-    @State private var entryType = "Milestone"
-    @State private var entryDay = "28"
+    @State private var isAchieved = true
+    
+    @State private var includeDay = true
+    
     @State private var entryDescription = "Became an IOS Developer"
     
     var body: some View {
         
         NavigationView {
         
-            
-            Form {
-                
-                Section(header: Text("Date")) {
+            VStack {
+                Form {
                     
-                    Picker ("Year", selection: $selectedYear) {
-                        ForEach(year, id: \.self) { year in
-                            Text(String(year))
-                        }
+                    Section {
+                        Toggle("Have you achieved it?", isOn: $isAchieved)
+                    } header: {
+                        Text("Milestone vs Target")
+                    } footer: {
+                        Text("Turning this ON will count it as a Milestone. Otherwise, it will count as a Target.")
                     }
+
+
+                    Section(header: Text(isAchieved ? "When did you achieve this milestone?" : "When do you want to achieve this target? ")) {
+                        
+                        Picker("Year", selection: $selectedYear) {
+                            ForEach(year, id: \.self) { year in
+                                Text(String(year))
+                            }
+                        }
+                    
+                        Picker("Month", selection: $selectedMonth) {
+                            ForEach(month, id: \.self) { month in
+                                Text(month)
+                            }
+                        }
+                        
+                        Toggle("Include day?", isOn: $includeDay)
+                        
+                        if includeDay {
+                            Picker("Day", selection: $selectedDay) {
+                                ForEach(day, id: \.self) { day in
+                                    Text(String(day))
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    Section(header: Text(isAchieved ? "What did you achieve?" : "What do you want to achieve?")) {
+                        TextField("Enter details...",
+                                      text: $entryDescription,
+                                  axis: .vertical)
+
+                    }
+                }
                 
+                Button("Save") {
                     
-                    
-    
                 }
             }
         }
     }
-        //        TextField("Enter text...",
-        //                      text: $entryDescription,
-        //                      axis: .vertical)
-        //                .padding()
-        //                .overlay(
-        //                    RoundedRectangle(cornerRadius: 14)
-        //                        .stroke(Color.gray, lineWidth: 2)
-        //                )
+
         
     
     
