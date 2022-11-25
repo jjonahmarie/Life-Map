@@ -9,12 +9,14 @@ import Foundation
 
 struct Entry {
     
-    var id: UUID = UUID()
-    var year: Int = 2008
-    var month: Month = Entry.Month.April
-    var day: Int? = 28
-    var isAchieved: Bool = false
-    var description: String = "Anniversary"
+    var id: UUID
+    var year: Int
+    var month: Month
+    var day: Int?
+    var isAchieved: Bool
+    var category: String
+    var categoryIcon: String
+    var description: String
     
     enum Month {
         case January,

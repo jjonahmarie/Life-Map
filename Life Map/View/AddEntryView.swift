@@ -10,18 +10,16 @@ import SwiftUI
 struct AddEntryView: View {
     
     var year = [2008, 2009, 2010, 2011, 2012]
-    @State private var selectedYear = 2012
-    
     var month = ["January", "February", "March", "April", "May"]
-    @State private var selectedMonth = "April"
+    var day = [25, 26, 27, 28, 29, 30]
+    var categories = ["Health", "School", "Work", "Relationship", "Family"]
     
-    var day: [Int] = [25, 26, 27, 28, 29, 30]
-    @State private var selectedDay = 28
-
     @State private var isAchieved = true
-    
+    @State private var selectedYear = 2012
+    @State private var selectedMonth = "April"
     @State private var includeDay = true
-    
+    @State private var selectedDay = 28
+    @State private var selectedCategory = "Work"
     @State private var entryDescription = "Became an IOS Developer"
     
     var body: some View {
@@ -68,6 +66,13 @@ struct AddEntryView: View {
                     }
                     
                     Section(header: Text(isAchieved ? "What did you achieve?" : "What do you want to achieve?")) {
+                        
+                        Picker("Category", selection: $selectedCategory) {
+                            ForEach(categories, id: \.self) { category in
+                                Text(category)
+                            }
+                        }
+                        
                         TextField("Enter details...",
                                       text: $entryDescription,
                                   axis: .vertical)
