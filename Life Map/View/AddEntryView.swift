@@ -9,10 +9,7 @@ import SwiftUI
 
 struct AddEntryView: View {
     
-    var year = [2008, 2009, 2010, 2011, 2012]
-    var month = ["January", "February", "March", "April", "May"]
-    var day = [25, 26, 27, 28, 29, 30]
-    var categories = ["Health", "School", "Work", "Relationship", "Family"]
+    @StateObject var entryModel = EntryModel()
     
     @State private var isAchieved = true
     @State private var selectedYear = 2012
@@ -41,13 +38,13 @@ struct AddEntryView: View {
                     Section(header: Text(isAchieved ? "When did you achieve this milestone?" : "When do you want to achieve this target? ")) {
                         
                         Picker("Year", selection: $selectedYear) {
-                            ForEach(year, id: \.self) { year in
+                            ForEach(entryModel.year, id: \.self) { year in
                                 Text(String(year))
                             }
                         }
                     
                         Picker("Month", selection: $selectedMonth) {
-                            ForEach(month, id: \.self) { month in
+                            ForEach(entryModel.month, id: \.self) { month in
                                 Text(month)
                             }
                         }
@@ -56,7 +53,7 @@ struct AddEntryView: View {
                         
                         if includeDay {
                             Picker("Day", selection: $selectedDay) {
-                                ForEach(day, id: \.self) { day in
+                                ForEach(entryModel.day, id: \.self) { day in
                                     Text(String(day))
                                 }
                             }
@@ -68,7 +65,7 @@ struct AddEntryView: View {
                     Section(header: Text(isAchieved ? "What did you achieve?" : "What do you want to achieve?")) {
                         
                         Picker("Category", selection: $selectedCategory) {
-                            ForEach(categories, id: \.self) { category in
+                            ForEach(entryModel.categories, id: \.self) { category in
                                 Text(category)
                             }
                         }
@@ -76,7 +73,6 @@ struct AddEntryView: View {
                         TextField("Enter details...",
                                       text: $entryDescription,
                                   axis: .vertical)
-
                     }
                 }
                 

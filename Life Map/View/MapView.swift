@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct MapView: View {
+    
+    var title: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack {
+            VStack {
+                Text("This is the \(title) page.")
+            }
+            .navigationBarTitle(title, displayMode: .inline)
+        }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(title: "Milestones")
     }
 }
