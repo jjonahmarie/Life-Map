@@ -76,9 +76,18 @@ struct AddEntryView: View {
                     }
                 }
                 
-                Button("Save") {
+                HStack {
+                    Button("Clear") {
+                        
+                    }
                     
+                    Spacer()
+                    
+                    Button("Save") {
+                        
+                    }
                 }
+                .padding()
             }
         }
     }
